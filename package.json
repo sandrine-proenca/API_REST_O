@@ -1,5 +1,5 @@
 {
-   "name": "apiResto",
+   "name": "apiresto",
    "version": "0.0.1",
    "description": "Brief typeOrm",
    "type": "commonjs",
@@ -16,12 +16,11 @@
       "nodemon": "^2.0.20",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
-      "save": "^2.9.0",
       "typecript": "^0.0.1-security",
       "typeorm": "0.3.11"
    },
    "scripts": {
-      "dev":"nodemon src/index.ts",
+      "dev": "nodemon src/index.ts",
       "start": "ts-node src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
    }
