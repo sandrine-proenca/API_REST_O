@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm"
 import { Command } from "./Command"
 
-export class Menu extends BaseEntity {
 
+@Entity()
+export class Menu extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -13,6 +14,6 @@ export class Menu extends BaseEntity {
     @Column({ nullable: false })
     price: string
 
-    @OneToMany(()=>Command, (command)=>command.menu)
-    command:Command[]
+    @OneToMany(() => Command, (command) => command.menu)
+    command: Command[]
 }

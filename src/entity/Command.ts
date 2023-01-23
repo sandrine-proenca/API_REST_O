@@ -1,8 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne } from "typeorm"
 import { Menu } from "./menu"
 import { User } from "./user"
 import { Restaurant } from "./restaurant"
 
+
+@Entity()
 export class Command extends BaseEntity {
 
     @PrimaryGeneratedColumn()
