@@ -1,17 +1,23 @@
+import { DataSource } from "typeorm";
+import { AppDataSource } from "../data-source";
 import { User } from "../entity/user"
 
 export class UserService
 {
 
-    async addUsers(email: string, hash: string): Promise<User | undefined>
+    async addUser(email: string, hash: string): Promise<User | undefined>
     {
         const user = new User()
         user.email = email
         user.password = hash
+        console.log(user);
+        
+        console.log('------- service --------- test 1 ---------------', AppDataSource.options.entities);
+        //////////////////////////////
 
-        await user.save()
-
-        return user
+        
+        
+        return await user.save();
     }
 
     async getUserByEmail(email: string, hash: string): Promise <User | undefined> {
@@ -24,4 +30,11 @@ export class UserService
 
         return user
     }
+    
+    /* static findByEmail(email: string, password: string){
+        return this.createQueryBuilder("user")
+            .where("user.email = :email", {email})
+            .andWhere("user.password = :password", {password})
+            .getMany()
+    } */
 }
