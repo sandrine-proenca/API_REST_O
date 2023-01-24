@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm"
-import { Command } from "./command"
+import { Command } from "./Command"
 
 
 @Entity()

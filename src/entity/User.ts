@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm"
-import { Command } from "./command"
+import { Command } from "./Command"
 
 
 @Entity()
@@ -12,7 +12,7 @@ export class User extends BaseEntity {
     email: string
 
     @Column({ nullable: false })
-    password: number
+    password: string
 
     @Column({default:false})
     admin: boolean
