@@ -10,6 +10,6 @@ export class Restaurant extends BaseEntity {
     @Column({ nullable: false })
     town: string
 
-    @OneToMany(() => Command, (command) => command.restaurant)
-    command: Command
+    /* @OneToMany(() => Command, (command) => command.restaurant)
+    command: Command */
 }

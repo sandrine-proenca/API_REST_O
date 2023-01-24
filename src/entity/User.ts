@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     @Column({default:false})
     admin: boolean
 
-    @OneToMany(() => Command, (command) => command.user)
-    command: Command
+    /* @OneToMany(() => Command, (command) => command.user)
+    command: Command */
 
 }

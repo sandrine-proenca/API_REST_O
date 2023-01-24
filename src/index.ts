@@ -1,8 +1,8 @@
 import { AppDataSource } from "./data-source"
 import { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv"
-import express = require("express");
 import { userRouter } from "./routes/userRouter";
+import express = require("express");
 
 
 

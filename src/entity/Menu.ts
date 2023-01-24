@@ -14,6 +14,6 @@ export class Menu extends BaseEntity {
     @Column({ nullable: false })
     price: string
 
-    @OneToMany(() => Command, (command) => command.menu)
-    command: Command[]
+    /* @OneToMany(() => Command, (command) => command.menu)
+    command: Command[] */
 }

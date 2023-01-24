@@ -1,6 +1,12 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-require('dotenv').config()
+import "reflect-metadata";
+import { DataSource } from "typeorm";
+import { Command } from "./entity/Command";
+import { Menu } from "./entity/Menu";
+import { Restaurant } from "./entity/Restaurant";
+import { User } from "./entity/user";
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
+//require('dotenv').config()
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -10,9 +16,7 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true,
-    logging: false,
-    entities: ["src/entity/**/*.ts"],
-    migrations: [],
-    subscribers: [],
+    logging: true,
+    entities: ['src/entities/*/.entity.ts']
 })
 
