@@ -32,17 +32,6 @@ export class UserController
             });
             return;
         }
-        /**
-         * vérification que le user n'existe pas déjà dans la BDD
-         */
-        const user = await userService.getUserByEmail(email, password);
-        if (user){
-            res.status(400).json({
-                status: "FAILED.",
-                message: "This user already exists, please change your name"
-            });
-            return;
-        }
         /**hachage du mot de passe */
         bcrypt.hash(password, 10, async (err, hash) =>
         {
@@ -51,7 +40,7 @@ export class UserController
                 /**
                  * ajout du nouveau user dans la BDD
                  */
-                const user = await userService.addUser(email, hash);
+                const user = await userService.addUser(email, hash).then
                 res.status(201).json({
                     status: "OK",
                     message: `The name: ${email} and the associated password have been successfully created.`,
@@ -101,17 +90,18 @@ export class UserController
             /**
              * récupération du user s'il existe dans la BDD
              */
-            const user = await userService.getUserByEmail(email, password);
+            const user = await userService.getUserByEmail(email);
+            
 
             if (user)
             {
                 /**hachage du password donné pour comparaison avec celui déjà enregistré */
                 bcrypt.compare(password, user.password, function (err, result)
                 {
-                    const accessToken = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET!);
 
                     if (result === true)
                     {
+                        const accessToken = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET!);
                         res.status(200).json({
                             status: "OK.",
                             message: "This password is valid",

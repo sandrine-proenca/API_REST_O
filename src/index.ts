@@ -3,7 +3,6 @@ import { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv"
 import { userRouter } from "./routes/userRouter";
 import express = require("express");
-import { restaurantRouter } from "./routes/restaurantRouter";
 
 
 
@@ -56,7 +55,6 @@ AppDataSource.initialize().then(async () => {
        */
 
     app.use('/api/users', userRouter);
-    app.use('/api/restaurant', restaurantRouter);
 
     app.all('*', function (req, res) {
         res.status(404).json(
