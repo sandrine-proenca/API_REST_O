@@ -54,7 +54,7 @@ AppDataSource.initialize().then(async () => {
        * Add the route here
        */
 
-    app.use('/api/user', userRouter);
+    app.use('/api/users', userRouter);
 
     app.all('*', function (req, res) {
         res.status(404).json(

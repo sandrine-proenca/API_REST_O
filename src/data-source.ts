@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import { Command } from "./entity/Command";
 import { Menu } from "./entity/Menu";
 import { Restaurant } from "./entity/Restaurant";
-import { User } from "./entity/user";
+import { User } from "./entity/User";
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 //require('dotenv').config()
@@ -16,7 +16,9 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true,
-    logging: true,
-    entities: ['src/entities/*/.entity.ts']
+    logging: true ,
+    //entities: [__dirname + '/*/.entity.{js,ts}'] 
+   // 'src/entities/*/.entity.ts'
+    entities: [User,Command, Menu, Restaurant]
 })
 

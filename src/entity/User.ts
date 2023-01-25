@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "t
 import { Command } from "./Command"
 
 
-@Entity()
+@Entity('users')
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     @Column({default:false})
     admin: boolean
 
-    /* @OneToMany(() => Command, (command) => command.user)
-    command: Command */
+    @OneToMany(() => Command, (command) => command.user)
+    command: Command[]
 
 }

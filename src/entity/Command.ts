@@ -11,7 +11,7 @@ export class Command extends BaseEntity {
     id: number
 
 
-    /* @ManyToOne(() => Menu, (menu) => menu.command, { nullable: false })
+    @ManyToOne(() => Menu, (menu) => menu.command, { nullable: false })
     menu: Menu
 
 
@@ -20,6 +20,6 @@ export class Command extends BaseEntity {
 
 
     @ManyToOne(() => User, (user) => user.command, { nullable: false })
-    user: User */
+    user: User
 
 }
