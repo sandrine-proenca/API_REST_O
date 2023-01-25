@@ -1,13 +1,13 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../data-source";
-import { Users } from "../entity/user"
+import { User } from "../entity/User"
 
 export class UserService
 {
 
-    async addUser(email: string, hash: string): Promise<Users | undefined>
+    async addUser(email: string, hash: string): Promise<User | undefined>
     {
-        const user = new Users()
+        const user = new User()
         user.email = email
         user.password = hash
         await user.save()
@@ -19,13 +19,13 @@ export class UserService
         return user;
     }
 
-    async getUserByEmail(email: string, hash: string): Promise <Users | undefined> {
+    async getUserByEmail(email: string, hash: string): Promise <User | undefined> {
 
-        const user = new Users()
+        const user = new User()
         user.email = email
         user.password = hash
 
-        await Users.find()
+        await User.find()
 
         return user
     }
