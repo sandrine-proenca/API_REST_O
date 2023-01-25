@@ -55,6 +55,7 @@ AppDataSource.initialize().then(async () => {
        */
 
     app.use('/api/users', userRouter);
+    app.use('/api/restaurant', restaurantRouter);
 
     app.all('*', function (req, res) {
         res.status(404).json(
