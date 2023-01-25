@@ -32,6 +32,15 @@ export class UserController
             });
             return;
         }
+
+const user = await userService.getUserByEmail(email)
+if (user){
+    res.status(400).json({
+        status: "FAILED",
+        message: "This user already exists, change email"
+    })
+}
+
         /**hachage du mot de passe */
         bcrypt.hash(password, 10, async (err, hash) =>
         {
@@ -40,7 +49,7 @@ export class UserController
                 /**
                  * ajout du nouveau user dans la BDD
                  */
-                const user = await userService.addUser(email, hash).then
+                const user = await userService.addUser(email, hash)
                 res.status(201).json({
                     status: "OK",
                     message: `The name: ${email} and the associated password have been successfully created.`,

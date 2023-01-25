@@ -21,17 +21,23 @@ export class UserService
 
         await user.save()
         user.password = ''
-        
-        return user;
+
+        if (user){
+            return user
+        }
+        return undefined
     }
     /**
      * récupère un user avec son email dans la BDD
      */
-    async getUserByEmail(email: string): Promise <User | null> {
+    async getUserByEmail(email: string): Promise <User | undefined> {
 
 
         const user = await User.findOneBy({email: email})
 
-        return user
+        if (user){
+            return user
+        }
+        return undefined
     }
 }
