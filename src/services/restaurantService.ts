@@ -10,10 +10,11 @@ import { Restaurant } from "src/entity/Restaurant"
  */
 export class RestaurantService
 {
+
     /**
      * création du restaurant dans la BDD
      */
-    async postRestaurant(town: string)
+    async postOneRestaurant(town: string)
     {
         const restaurant = new Restaurant()
         restaurant.town = town;

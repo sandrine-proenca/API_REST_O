@@ -47,7 +47,7 @@ if (user){
             try
             {
                 /**
-                 * ajout du nouveau user dans la BDD
+                 * contrôle préalable de l'ajout du nouveau user dans la BDD
                  */
                 const user = await userService.addUser(email, hash)
                 res.status(201).json({
