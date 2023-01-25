@@ -190,12 +190,67 @@ export class MenuController {
         }
     }
 
-    
+
 
     /**
      *Contrôle préalable à la modification d'un menu
       */
     async updateMenu(req: Request, res: Response) {
-        const menuId = parseInt
+        const menuId = parseInt(req.params.id)
+        const updateName = req.body.name
+        const updatePrice = req.body.price
+        const userId = req.user
+        const admin = req.body.admin
+
+
+        if (!Number.isNaN(menuId)) {
+            if (updateName && updatePrice !== undefined) {
+                try {
+                    const menuData = await menuService.updateMenu(updateName, updatePrice, menuId)
+                    if (!menuData) {
+                        res.status(404).json(
+                            {
+                                status: "fail",
+                                message: "necessite un nombre valable en ID"
+                            }
+                        )
+                    }
+                    else if (userId !== menuData && !admin) {
+                        res.status(404).json(
+                            {
+                                status: "fail",
+                                message: "modification non-autorisee"
+                            }
+                        )
+                    }
+                    else {
+                        res.status(201).json(
+                            {
+                                status: "success:",
+                                message: "donnees modifiees",
+                                data: menuData
+                            }
+                        )
+                    }
+
+                }
+                catch (err: any) {
+                    res.status(500).json(
+                        {
+                            status: "fail",
+                            message: "erreur serveur"
+                        }
+                    )
+                }
+            }
+            else {
+                res.status(400).json(
+                    {
+                        status: "fail",
+                        message: "valeurs manquantes"
+                    }
+                )
+            }
+        }
     }
 }
