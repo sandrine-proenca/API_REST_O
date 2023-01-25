@@ -1,5 +1,5 @@
 import express = require('express');
-import { RestaurantController } from 'src/controllers/restaurantController';
+import { RestaurantController } from '../controllers/restaurantController';
 
 export const restaurantRouter = express.Router()
 

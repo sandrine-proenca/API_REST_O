@@ -1,4 +1,4 @@
-import { Restaurant } from "src/entity/Restaurant"
+import { Restaurant } from "../entity/Restaurant"
 
 /**
  * Class permetant la gestion de requètes sql pour les restaurants
@@ -14,7 +14,7 @@ export class RestaurantService
     /**
      * création du restaurant dans la BDD
      */
-    async postOneRestaurant(town: string)
+    async postRestaurant(town: string)
     {
         const restaurant = new Restaurant()
         restaurant.town = town;

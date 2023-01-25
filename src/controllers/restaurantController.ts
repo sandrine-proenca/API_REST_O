@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { RestaurantService } from "src/services/restaurantService";
+import { RestaurantService } from "../services/restaurantService";
 
 /**
  * Appel de Class permetant la gestion de requètes sql pour les restaurants
@@ -47,7 +47,7 @@ export class RestaurantController
 
         try
         {
-            const data = await restaurantService.postOneRestaurant(town)
+            const data = await restaurantService.postRestaurant(town)
 
             res.status(201).json(
                 {
