@@ -56,16 +56,15 @@ export class MenuService {
      * supprime un menu de la BDD
      */
     async deleteMenu(id: number): Promise<Menu | undefined> {
-        const menu = this.getMenuById(id);
+        const menu = await this.getMenuById(id);
 
-        (await menu).remove()
+        menu.remove()
 
-        console.log(menu);
         return menu
 
     }
 
-    
+
 
     /**
      * modifie un menu par son id de la BDD
