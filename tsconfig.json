@@ -1,14 +1,30 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es6"
-      ],
-      "target": "ES6",
+   /*    "compilerOptions": {
+      "target": "ES2016",
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true
+   } */
+   "compilerOptions": {
+      "baseUrl": ".",
+      "target": "es2016",
+      "module": "CommonJS",
+      "skipLibCheck": true,
+      "lib": [
+         "esnext"
+      ],
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "strict": true,
+      "strictNullChecks": true,
+      "resolveJsonModule": true,
+      "skipDefaultLibCheck": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "outDir": "./dist",
+      "strictPropertyInitialization": false,
    }
 }

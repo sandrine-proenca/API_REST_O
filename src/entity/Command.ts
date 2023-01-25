@@ -1,25 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne } from "typeorm"
+
 import { Menu } from "./Menu"
-import { User } from "./User"
+import { Users } from "./User"
 import { Restaurant } from "./Restaurant"
+import { Entity, BaseEntity, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
 
 
 @Entity()
-export class Command extends BaseEntity {
+export class Commande extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
 
 
-    @ManyToOne(() => Menu, (menu) => menu.command, { nullable: false })
+    @ManyToOne(() => Users, (user) => user.commandes, { nullable: false })
+    user: Users
+
+
+    @ManyToOne(() => Menu, (menu) => menu.commandes, { nullable: false })
     menu: Menu
 
 
-    @ManyToOne(() => Restaurant, (restaurant) => restaurant.command,{ nullable: false })
+    @ManyToOne(() => Restaurant, (restaurant) => restaurant.commandes, { nullable: false })
     restaurant: Restaurant
 
 
-    @ManyToOne(() => User, (user) => user.command, { nullable: false })
-    user: User
+
 
 }

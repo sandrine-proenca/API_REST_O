@@ -1,6 +1,10 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { Menu } from "./entity/Menu"
+import { Restaurant } from "./entity/Restaurant"
+import { Users } from "./entity/User"
 require('dotenv').config()
+import { Commande } from "./entity/Command"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -10,9 +14,9 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     synchronize: true,
-    logging: false,
-    entities: ["src/entity/**/*.ts"],
-    migrations: [],
-    subscribers: [],
+    logging: true,
+    entities: [Users,Commande,Menu,Restaurant]
+  /*   migrations: [],
+    subscribers: [], */
 })
 

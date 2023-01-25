@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm"
-import { Command } from "./Command"
+import { Commande } from "./Command"
 
 
 @Entity()
-export class User extends BaseEntity {
+export class Users extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     @Column({default:false})
     admin: boolean
 
-    @OneToMany(() => Command, (command) => command.user)
-    command: Command
+    @OneToMany(() => Commande, (commande) => commande.user)
+    commandes: Commande []
 
 }

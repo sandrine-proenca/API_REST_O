@@ -3,7 +3,7 @@ import { Restaurant } from "../entity/Restaurant";
 
 export class RestaurantService{
 
-    async addRestaurant (town: string): Promise<Restaurant [] | undefined>{
+    async addRestaurant (town: string): Promise<Restaurant | undefined>{
 
         const restaurant = new Restaurant()
         restaurant.town = town
@@ -12,7 +12,7 @@ export class RestaurantService{
         console.log(restaurant.save());
         
 
-        return restaurant [0]
+        return restaurant 
     }
 
     async getAllRestaurant (town: string): Promise <Restaurant | undefined>{
@@ -27,7 +27,7 @@ export class RestaurantService{
         return restaurant 
     }
 
-    async geRestaurantById (id: number): Promise <Restaurant [] | undefined>{
+    async geRestaurantById (id: number): Promise <Restaurant | undefined>{
 
         const restaurant = new Restaurant()
         restaurant.id = id
@@ -35,7 +35,7 @@ export class RestaurantService{
         await Restaurant.findBy({id})
         console.log(Restaurant.findBy({id}));
 
-        return restaurant[0]
+        return restaurant
         
     }
 
@@ -45,8 +45,8 @@ export class RestaurantService{
         restaurant.id = id
         restaurant.town = town
 
-        await Restaurant.update({id, town})
-        console.log(Restaurant.update());
+    /*     await Restaurant.update({id, town})
+        console.log(Restaurant.update()); */
 
         return restaurant
     }

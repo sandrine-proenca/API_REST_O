@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserService } from "../services/userService";
 import * as bcrypt from 'bcrypt';
 import { AppDataSource } from "../data-source";
-import { User } from "../entity/user";
+import { Users } from "../entity/user";
 
 
 const userService = new UserService();

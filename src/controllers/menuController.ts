@@ -190,11 +190,12 @@ export class MenuController {
         }
     }
 
+    
 
-   /**
-    *Contrôle préalable à la modification d'un menu
-     */
-    async updateMenu(req:Request, res:Response) {
-        const menuId=parseInt
+    /**
+     *Contrôle préalable à la modification d'un menu
+      */
+    async updateMenu(req: Request, res: Response) {
+        const menuId = parseInt
     }
 }
