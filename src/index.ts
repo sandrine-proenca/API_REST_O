@@ -3,6 +3,7 @@ import { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv"
 import { userRouter } from "./routes/userRouter";
 import express = require("express");
+import { restaurantRouter } from "./routes/restaurantRouter";
 
 
 
