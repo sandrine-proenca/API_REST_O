@@ -1,6 +1,6 @@
 
 import { Menu } from "./Menu"
-import { Users } from "./User"
+import { User } from "./User"
 import { Restaurant } from "./Restaurant"
 import { Entity, BaseEntity, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
 
@@ -12,8 +12,8 @@ export class Commande extends BaseEntity {
     id: number
 
 
-    @ManyToOne(() => Users, (user) => user.commandes, { nullable: false })
-    user: Users
+    @ManyToOne(() => User, (user) => user.commandes, { nullable: false })
+    user: User
 
 
     @ManyToOne(() => Menu, (menu) => menu.commandes, { nullable: false })

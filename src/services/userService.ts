@@ -10,14 +10,13 @@ export class UserService
         const user = new Users()
         user.email = email
         user.password = hash
-        console.log(user);
-        
+        await user.save()
         console.log('------- service --------- test 1 ---------------', AppDataSource.options.entities);
         //////////////////////////////
 
         
         
-        return await user.save();
+        return user;
     }
 
     async getUserByEmail(email: string, hash: string): Promise <Users | undefined> {

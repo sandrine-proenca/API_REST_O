@@ -2,8 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "t
 import { Commande } from "./Command"
 
 
-@Entity()
-export class Users extends BaseEntity {
+@Entity('users')
+export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -17,7 +17,7 @@ export class Users extends BaseEntity {
     @Column({default:false})
     admin: boolean
 
-    @OneToMany(() => Commande, (commande) => commande.user)
-    commandes: Commande []
+    @OneToMany(() => Commande, (command) => command.user)
+    commandes: Commande[]
 
 }
