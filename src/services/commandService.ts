@@ -87,7 +87,7 @@ export class commandService {
     /**
      * modifie une commande par son id de la BDD
      */
-    async updateCommande(commandeId: number, menuId: number, restaurantId: number) {
+    async updateCommande(commandeId: number, menuId: number, restaurantId: number): Promise<Commande | undefined> {
         const commande = await this.getCommandeById(commandeId);
         const menu = await Menu.findOneBy({ id: menuId })
         const restaurant = await Restaurant.findOneBy({ id: restaurantId })

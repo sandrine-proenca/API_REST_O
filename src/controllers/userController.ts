@@ -3,28 +3,31 @@ import { UserService } from "../services/userService";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
+
+
+
 /**
  * Appel de Class permetant la gestion de requètes sql pour les users
  */
 const userService = new UserService();
+const accessTokenSecret = process.env.TOKEN_SECRET as string;
+
+
 /**
  * Class qui fait le contrôle préalable des données pour les users
  * **.register()**: Contrôle préalable de la création d'un user
  * **.login()**: contrôle préalable de la récupération d'un user par son email
  */
-export class UserController
-{
-    
+export class UserController {
+
     /**
      * Contrôle préalable de la création d'un user
      */
-    async register(req: Request, res: Response)
-    {
+    async register(req: Request, res: Response) {
 
         const { email, password } = req.body
         //message d'erreur pour email ou password incorect
-        if (!email || !password)
-        {
+        if (!email || !password) {
             res.status(400).json({
                 status: "FAILED",
                 message: "error in email or password",
@@ -33,19 +36,17 @@ export class UserController
             return;
         }
 
-const user = await userService.getUserByEmail(email)
-if (user){
-    res.status(400).json({
-        status: "FAILED",
-        message: "This user already exists, change email"
-    })
-}
+        const user = await userService.getUserByEmail(email)
+        if (user) {
+            res.status(400).json({
+                status: "FAILED",
+                message: "This user already exists, change email"
+            })
+        }
 
         /**hachage du mot de passe */
-        bcrypt.hash(password, 10, async (err, hash) =>
-        {
-            try
-            {
+        bcrypt.hash(password, 10, async (err, hash) => {
+            try {
                 /**
                  * contrôle préalable de l'ajout du nouveau user dans la BDD
                  */
@@ -55,8 +56,7 @@ if (user){
                     message: `The name: ${email} and the associated password have been successfully created.`,
                     data: user
                 });
-            } catch (err)
-            {
+            } catch (err) {
                 res.status(500).json({
                     status: "FAILED",
                     message: "Internal Server Error",
@@ -66,16 +66,17 @@ if (user){
             }
         })
     }
+
+
+
     /**
      * contrôle préalable de la récupération d'un user par son email
      */
-    async login(req: Request, res: Response)
-    {
+    async login(req: Request, res: Response) {
         const { email, password } = req.body;
 
         //vérifier que l'email existe et bien écrit
-        if (email === undefined || typeof email !== typeof String())
-        {
+        if (email === undefined || typeof email !== typeof String()) {
             res.status(403).json({
                 status: "FAILED",
                 message: "This email is invalid",
@@ -85,40 +86,36 @@ if (user){
         }
 
         //vérifier  que le password existe et bien écrit
-        if (password === undefined || typeof password !== typeof String())
-        {
+        if (password === undefined || typeof password !== typeof String()) {
             res.status(403).json({
-                status: "FAILED.",
+                status: "FAIL",
                 message: "This password is invalid",
                 data: undefined
             })
             return;
         }
-        try
-        {
+        try {
             /**
              * récupération du user s'il existe dans la BDD
              */
-            const user = await userService.getUserByEmail(email);
-            
+            const user = await userService.getUserByEmail(email, true);
 
-            if (user)
-            {
+
+            if (user) {
+
                 /**hachage du password donné pour comparaison avec celui déjà enregistré */
-                bcrypt.compare(password, user.password, function (err, result)
-                {
+                bcrypt.compare(password, user.password, async (err, result) => {
 
-                    if (result === true)
-                    {
-                        const accessToken = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET!);
+                    if (result === true) {
+
+                        const accessToken = jwt.sign({ userId: user.id }, accessTokenSecret);
                         res.status(200).json({
                             status: "OK.",
                             message: "This password is valid",
                             data: accessToken
                         })
                     }
-                    else
-                    {
+                    else {
                         res.status(403).json({
                             status: "FAILED.",
                             message: "This password is invalid",
@@ -135,7 +132,7 @@ if (user){
                 });
             }
         }
-        catch(err){
+        catch (err) {
             res.status(500).json({
                 status: "FAILED.",
                 message: "Internal Server Error"
