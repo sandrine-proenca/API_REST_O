@@ -1,7 +1,7 @@
-import { Commande } from "src/entity/Command";
-import { Menu } from "src/entity/Menu";
-import { Restaurant } from "src/entity/Restaurant";
-import { User } from "src/entity/User";
+import { Commande } from "../entity/Command";
+import { Menu } from "../entity/Menu";
+import { Restaurant } from "../entity/Restaurant";
+import { User } from "../entity/User";
 
 
 
@@ -21,7 +21,12 @@ export class commandService {
    * recupère toutes les commandes de la BDD 
    */
     async getAllCommandes(): Promise<Commande[] | undefined> {
-        const commandes = Commande.find();
+        const commandes = Commande.find({
+            relations: {
+                restaurant: true,
+                menu: true
+            }
+        });
 
         return commandes
     }
@@ -88,9 +93,12 @@ export class commandService {
      * modifie une commande par son id de la BDD
      */
     async updateCommande(commandeId: number, menuId: number, restaurantId: number): Promise<Commande | undefined> {
+
         const commande = await this.getCommandeById(commandeId);
         const menu = await Menu.findOneBy({ id: menuId })
+        console.log(menu);
         const restaurant = await Restaurant.findOneBy({ id: restaurantId })
+        console.log("test2", commande, menu, restaurant);
 
         if (commande && menu && restaurant) {
 

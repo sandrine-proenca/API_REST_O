@@ -1,4 +1,4 @@
-import express from "express";
+import express = require('express');
 import { isAdmin } from "../middleware/isAdmin";
 import { MenuController } from "../controllers/menuController";
 import { authenticateJWT } from "../middleware/auth";
