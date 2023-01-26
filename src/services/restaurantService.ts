@@ -23,6 +23,8 @@ export class RestaurantService
 
         return restaurant
     }
+
+    
     /**
      * récupération de tous les restaurants dans la BDD
      */
@@ -32,6 +34,8 @@ export class RestaurantService
 
         return restaurant
     }
+
+
 /**
  * récupération d'un restaurant par son id dans la BDD
  */
@@ -41,6 +45,8 @@ export class RestaurantService
         return restaurant[0]
         
     }
+
+
     /**
      * récupération d'un restaurant par son id dans la BDD et
      * chachement  de la donnée 'town' avec sauvegarde dans la BDD
@@ -53,6 +59,8 @@ export class RestaurantService
 
         return restaurant
     }
+
+
     /**
      * récupération d'un restaurant par son id dans la BDD et
      * suppression dans la BDD

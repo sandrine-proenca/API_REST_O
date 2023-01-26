@@ -4,6 +4,8 @@ import * as dotenv from "dotenv"
 import { userRouter } from "./routes/userRouter";
 import { restaurantRouter } from "./routes/restaurantRouter";
 import express = require("express");
+import { menuRouter } from "./routes/menuRouter";
+import { commandeRouter } from "./routes/CommandRouter";
 
 
 
@@ -56,6 +58,8 @@ AppDataSource.initialize().then(async () => {
        */
     app.use('/api/restaurant', restaurantRouter);
     app.use('/api/users', userRouter);
+    app.use('/api/menu', menuRouter);
+    app.use('/api/commande', commandeRouter);
 
     app.all('*', function (req, res) {
         res.status(404).json(

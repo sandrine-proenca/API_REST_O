@@ -95,9 +95,8 @@ export class MenuController {
     async postMenu(req: Request, res: Response) {
         const name: string = req.body.name
         const price: string = req.body.price
-        const admin: boolean = req.body.admin
 
-        if (name && price && admin) {
+        if (name && price) {
             try {
                 const data = await menuService.postMenu(name, price)
                 res.status(201).json(
@@ -122,21 +121,19 @@ export class MenuController {
             res.status(400).json(
                 {
                     status: "fail",
-                    message: "nom, prix ou droits admin manquant"
+                    message: "nom ou prix manquant"
                 }
             )
         }
     }
 
-    
+
 
     /**
      *Contrôle préalable à la suppression d'un menu
       */
     async deleteMenu(req: Request, res: Response) {
-        const menuId = parseInt(req.params.id)
-        const userId: number = req.body.userId
-        const admin: boolean = req.body.admin
+        const menuId: number = parseInt(req.params.id)
 
         if (!Number.isNaN(menuId)) {
             try {
@@ -150,21 +147,13 @@ export class MenuController {
                         }
                     )
                 }
-                else if (userId !== menuData.id && !admin) {
-                    res.status(400).json(
-                        {
-                            status: "fail",
-                            message: "action non-autorisee"
-                        }
-                    )
-                }
                 else {
                     const data = await menuService.deleteMenu(menuId)
                     if (data) {
                         res.status(200).json(
                             {
                                 status: "success",
-                                message: "article supprime"
+                                message: "Menu supprime"
                             }
                         )
                     }
@@ -200,8 +189,6 @@ export class MenuController {
         const menuId = parseInt(req.params.id)
         const updateName = req.body.name
         const updatePrice = req.body.price
-        const userId = req.user
-        const admin = req.body.admin
 
 
         if (!Number.isNaN(menuId)) {
@@ -213,14 +200,6 @@ export class MenuController {
                             {
                                 status: "fail",
                                 message: "necessite un nombre valable en ID"
-                            }
-                        )
-                    }
-                    else if (userId !== menuData && !admin) {
-                        res.status(404).json(
-                            {
-                                status: "fail",
-                                message: "modification non-autorisee"
                             }
                         )
                     }
