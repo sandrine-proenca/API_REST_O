@@ -1,16 +1,18 @@
 import express = require('express');
+import { authenticateJWT } from '../middleware/auth';
 import { RestaurantController } from '../controllers/restaurantController';
+import { isAdmin } from '../middleware/isAdmin';
 
 export const restaurantRouter = express.Router()
 
 const restaurantController = new RestaurantController()
 
-restaurantRouter.post('/', restaurantController.postRestaurant)
+restaurantRouter.post('/', authenticateJWT, isAdmin, restaurantController.postRestaurant)
 
 restaurantRouter.get('/', restaurantController.getRestaurant)
 
 restaurantRouter.get('/:id', restaurantController.getOneRestaurant)
 
-restaurantRouter.put('/:id', restaurantController.putOneRestaurant)
+restaurantRouter.put('/:id', authenticateJWT, isAdmin, restaurantController.putOneRestaurant)
 
-restaurantRouter.delete('/:id', restaurantController.deleteOneRestaurant)
+restaurantRouter.delete('/:id', authenticateJWT, isAdmin, restaurantController.deleteOneRestaurant)

@@ -4,7 +4,7 @@ import { Menu } from "src/entity/Menu";
 import { Restaurant } from "src/entity/Restaurant";
 import { User } from "src/entity/User";
 
-import { commandService } from "src/services/commandService";
+import { commandService } from "../services/commandService";
 
 
 

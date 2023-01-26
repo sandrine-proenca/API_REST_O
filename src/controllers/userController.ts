@@ -108,7 +108,7 @@ export class UserController {
 
                     if (result === true) {
 
-                        const accessToken = jwt.sign({ userId: user.id }, accessTokenSecret);
+                        const accessToken = jwt.sign({ userId: user.id, admin:user.admin }, accessTokenSecret);
                         res.status(200).json({
                             status: "OK.",
                             message: "This password is valid",

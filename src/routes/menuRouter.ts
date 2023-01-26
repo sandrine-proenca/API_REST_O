@@ -1,6 +1,7 @@
 import express from "express";
-import { MenuController } from "src/controllers/menuController";
-import { authenticateJWT } from "src/middleware/auth";
+import { isAdmin } from "../middleware/isAdmin";
+import { MenuController } from "../controllers/menuController";
+import { authenticateJWT } from "../middleware/auth";
 
 
 /**
@@ -17,23 +18,23 @@ const menuController = new MenuController();
 
 /** 
  * route de récuperation de tout les menus */
-menuRouter.get('/', authenticateJWT, menuController.getMenus);
+menuRouter.get('/', menuController.getMenus);
 
 /** 
  *route de récuperation des menus par l'ID */
-menuRouter.get('/:id', authenticateJWT, menuController.getMenuId);
+menuRouter.get('/:id', menuController.getMenuId);
 
 /** 
  * route de création d'un menu */
-menuRouter.post('/', authenticateJWT, menuController.postMenu);
+menuRouter.post('/', authenticateJWT,isAdmin, menuController.postMenu);
 
 /** 
  * route de suppression d'un menu */
-menuRouter.delete('/:id', authenticateJWT, menuController.deleteMenu);
+menuRouter.delete('/:id', authenticateJWT,isAdmin, menuController.deleteMenu);
 
 /** 
  * route de modification d'un menu */
-menuRouter.put('/:id', authenticateJWT, menuController.updateMenu);
+menuRouter.put('/:id', authenticateJWT,isAdmin, menuController.updateMenu);
 
 
 
