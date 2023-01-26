@@ -13,6 +13,6 @@ restaurantRouter.get('/', restaurantController.getRestaurant)
 
 restaurantRouter.get('/:id', restaurantController.getOneRestaurant)
 
-restaurantRouter.put('/:id', authenticateJWT, isAdmin, restaurantController.putOneRestaurant)
+restaurantRouter.put('/', authenticateJWT, isAdmin, restaurantController.putOneRestaurant)
 
-restaurantRouter.delete('/:id', authenticateJWT, isAdmin, restaurantController.deleteOneRestaurant)
+restaurantRouter.delete('/', authenticateJWT, isAdmin, restaurantController.deleteOneRestaurant)

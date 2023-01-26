@@ -30,7 +30,6 @@ export class MenuService {
      */
     async getMenuById(id: number) {
         const menu = await Menu.findBy({ id: id });
-        console.log(menu);
         return menu[0]
     }
 

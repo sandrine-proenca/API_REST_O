@@ -53,6 +53,7 @@ export class RestaurantController {
         }
     }
 
+
     /**
      * contrôle préalable de la récupérationde tous les restaurants dans la BDD
      */
@@ -85,6 +86,7 @@ export class RestaurantController {
             console.log(err);
         }
     }
+
 
     /**
      * contrôle préalable de la récupérationde d'un restaurant dans la BDD
@@ -128,11 +130,11 @@ export class RestaurantController {
         }
     }
 
+
     /**
      * contrôle préalable de la récupération d'un restaurant dans la BDD puis modification de la ville par l'admin et enregistrement dans la BDD
      */
     async putOneRestaurant(req: Request, res: Response) {
-        const admin: boolean = req.body.admin
         const town: string = req.body.town
         const restaurantId: number = parseInt(req.body.id)
 
@@ -164,15 +166,6 @@ export class RestaurantController {
                 return;
             }
 
-            if (checkRestaurant && !admin) {
-                res.status(404).json({
-                    status: "FAILED",
-                    message: "Obligation to be an admin",
-                    data: undefined
-                });
-                return;
-            }
-
             const restaurant = await restaurantService.putRestaurantById(town, restaurantId)
 
             res.status(201).json({
@@ -191,12 +184,12 @@ export class RestaurantController {
         }
     }
 
+
     /**
      * contrôle préalable de la récupérationde d'un restaurant dans la BDD puis suppression par l'admin et enregistrement dans la BDD
      */
     async deleteOneRestaurant(req: Request, res: Response) {
 
-        const admin: boolean = req.body.admin
         const restaurantId: number = parseInt(req.body.id)
 
         if (Number.isNaN(restaurantId)) {
@@ -214,15 +207,6 @@ export class RestaurantController {
                 res.status(404).json({
                     status: "FAILED",
                     message: "The restaurant does not exist",
-                    data: undefined
-                });
-                return;
-            }
-
-            if (checkRestaurant && !admin) {
-                res.status(404).json({
-                    status: "FAILED",
-                    message: "Obligation to be an admin",
                     data: undefined
                 });
                 return;
