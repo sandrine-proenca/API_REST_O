@@ -38,7 +38,6 @@ export class RestaurantService
     async getRestaurantById(id: number): Promise <Restaurant | any>
     {
         const restaurant = await Restaurant.findBy({id: id})
-        console.log(restaurant)
         return restaurant[0]
         
     }

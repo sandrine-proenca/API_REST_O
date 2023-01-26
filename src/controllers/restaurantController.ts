@@ -14,19 +14,16 @@ const restaurantService = new RestaurantService()
  * **.putOneRestaurant**: contrôle préalable de la récupération d'un restaurant dans la BDD puis modification de la ville par l'admin et enregistrement dans la BDD
  * **.deleteOneRestaurant**: contrôle préalable de la récupérationde d'un restaurant dans la BDD puis suppression par l'admin et enregistrement dans la BDD
  */
-export class RestaurantController
-{
+export class RestaurantController {
 
     /**
      * contrôle préalable de l'ajout du nouveau restaurant dans la BDD par un admin
      */
-    async postRestaurant(req: Request, res: Response)
-    {
+    async postRestaurant(req: Request, res: Response) {
 
         const town: string = req.body.town
-        const admin: boolean = req.body.admin
-        if (town === undefined || typeof town !== typeof String())
-        {
+
+        if (town === undefined || typeof town !== typeof String()) {
             res.status(404).json({
                 status: "FAILED",
                 message: "Obligation to have a restaurant in the right format",
@@ -35,18 +32,7 @@ export class RestaurantController
             return;
         }
 
-        if (!admin)
-        {
-            res.status(404).json({
-                status: "FAILED",
-                message: "Obligation to be an admin",
-                data: undefined
-            });
-            return;
-        }
-
-        try
-        {
+        try {
             const data = await restaurantService.postRestaurant(town)
 
             res.status(201).json(
@@ -57,8 +43,7 @@ export class RestaurantController
                 }
             )
         }
-        catch (err)
-        {
+        catch (err) {
             res.status(500).json({
                 status: "FAILED",
                 message: "Internal Server Error",
@@ -68,17 +53,15 @@ export class RestaurantController
         }
     }
 
+
     /**
      * contrôle préalable de la récupérationde tous les restaurants dans la BDD
      */
-    async getRestaurant(req: Request, res: Response)
-    {
-        try
-        {
+    async getRestaurant(req: Request, res: Response) {
+        try {
             const restaurant = await restaurantService.getAllRestaurant()
 
-            if (restaurant === undefined)
-            {
+            if (restaurant === undefined) {
                 res.status(404).json({
                     status: "FAILED",
                     message: "No restaurants exist",
@@ -94,8 +77,7 @@ export class RestaurantController
                     data: restaurant
                 })
         }
-        catch (err)
-        {
+        catch (err) {
             res.status(500).json({
                 status: "FAILED",
                 message: "Internal Server Error",
@@ -105,28 +87,25 @@ export class RestaurantController
         }
     }
 
+
     /**
      * contrôle préalable de la récupérationde d'un restaurant dans la BDD
      */
-    async getOneRestaurant(req: Request, res: Response)
-    {
+    async getOneRestaurant(req: Request, res: Response) {
 
         const restaurantId: number = parseInt(req.params.id)
 
-        if (Number.isNaN(restaurantId))
-        {
+        if (Number.isNaN(restaurantId)) {
             res.status(400).json({
                 status: "FAILED",
                 message: "The request misunderstood by the server / incorrect syntax",
                 data: undefined
             });
         }
-        try
-        {
+        try {
             const restaurant = await restaurantService.getRestaurantById(restaurantId)
 
-            if (restaurant === undefined)
-            {
+            if (restaurant === undefined) {
                 res.status(404).json({
                     status: "FAILED",
                     message: "The restaurant does not exist",
@@ -141,8 +120,7 @@ export class RestaurantController
                     data: restaurant
                 })
         }
-        catch (err)
-        {
+        catch (err) {
             res.status(500).json({
                 status: "FAILED",
                 message: "Internal Server Error",
@@ -152,17 +130,15 @@ export class RestaurantController
         }
     }
 
+
     /**
      * contrôle préalable de la récupération d'un restaurant dans la BDD puis modification de la ville par l'admin et enregistrement dans la BDD
      */
-    async putOneRestaurant(req: Request, res: Response)
-    {
-        const admin: boolean = req.body.admin
+    async putOneRestaurant(req: Request, res: Response) {
         const town: string = req.body.town
         const restaurantId: number = parseInt(req.body.id)
 
-        if (Number.isNaN(restaurantId))
-        {
+        if (Number.isNaN(restaurantId)) {
             res.status(400).json({
                 status: "FAILED",
                 message: "The request misunderstood by the server / incorrect syntax",
@@ -170,8 +146,7 @@ export class RestaurantController
             });
         }
 
-        if (town === undefined || typeof town !== typeof String())
-        {
+        if (town === undefined || typeof town !== typeof String()) {
             res.status(404).json({
                 status: "FAILED",
                 message: "Obligation to have a restaurant in the right format",
@@ -179,25 +154,13 @@ export class RestaurantController
             });
             return;
         }
-        try
-        {
+        try {
             const checkRestaurant = await restaurantService.getRestaurantById(restaurantId)
 
-            if (checkRestaurant === undefined)
-            {
+            if (checkRestaurant === undefined) {
                 res.status(404).json({
                     status: "FAILED",
                     message: "The restaurant does not exist",
-                    data: undefined
-                });
-                return;
-            }
-
-            if (checkRestaurant && !admin)
-            {
-                res.status(404).json({
-                    status: "FAILED",
-                    message: "Obligation to be an admin",
                     data: undefined
                 });
                 return;
@@ -211,8 +174,7 @@ export class RestaurantController
                 data: restaurant
             });
         }
-        catch (err)
-        {
+        catch (err) {
             res.status(500).json({
                 status: "FAILED",
                 message: "Internal Server Error",
@@ -222,16 +184,15 @@ export class RestaurantController
         }
     }
 
+
     /**
      * contrôle préalable de la récupérationde d'un restaurant dans la BDD puis suppression par l'admin et enregistrement dans la BDD
      */
-    async deleteOneRestaurant(req:Request, res:Response){
+    async deleteOneRestaurant(req: Request, res: Response) {
 
-        const admin: boolean = req.body.admin
         const restaurantId: number = parseInt(req.body.id)
 
-        if (Number.isNaN(restaurantId))
-        {
+        if (Number.isNaN(restaurantId)) {
             res.status(400).json({
                 status: "FAILED",
                 message: "The request misunderstood by the server / incorrect syntax",
@@ -239,25 +200,13 @@ export class RestaurantController
             });
         }
 
-        try
-        {
+        try {
             const checkRestaurant = await restaurantService.getRestaurantById(restaurantId)
 
-            if (checkRestaurant === undefined)
-            {
+            if (checkRestaurant === undefined) {
                 res.status(404).json({
                     status: "FAILED",
                     message: "The restaurant does not exist",
-                    data: undefined
-                });
-                return;
-            }
-
-            if (checkRestaurant && !admin)
-            {
-                res.status(404).json({
-                    status: "FAILED",
-                    message: "Obligation to be an admin",
                     data: undefined
                 });
                 return;
@@ -271,8 +220,7 @@ export class RestaurantController
                 data: restaurant
             });
         }
-        catch (err)
-        {
+        catch (err) {
             res.status(500).json({
                 status: "FAILED",
                 message: "Internal Server Error",

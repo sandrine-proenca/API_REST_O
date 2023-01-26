@@ -11,10 +11,10 @@ export class User extends BaseEntity {
     @Column({ nullable: false, unique: true })
     email: string
 
-    @Column({ nullable: false })
+    @Column({ nullable: false, select: false })
     password: string
 
-    @Column({default:false})
+    @Column({ default: false })
     admin: boolean
 
     @OneToMany(() => Commande, (command) => command.user)

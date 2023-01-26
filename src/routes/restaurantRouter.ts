@@ -1,5 +1,7 @@
 import express = require('express');
+import { authenticateJWT } from '../middleware/auth';
 import { RestaurantController } from '../controllers/restaurantController';
+import { isAdmin } from '../middleware/isAdmin';
 
 export const restaurantRouter = express.Router()
 
@@ -8,14 +10,13 @@ export const restaurantRouter = express.Router()
  */
 const restaurantController = new RestaurantController()
 
-/**création d'un nouveau restaurant par un admin dans la BDD */
-restaurantRouter.post('/', restaurantController.postRestaurant)
+restaurantRouter.post('/', authenticateJWT, isAdmin, restaurantController.postRestaurant)
 
 /**récupération de tous les restaurants par un user */
 restaurantRouter.get('/', restaurantController.getRestaurant)
 
 restaurantRouter.get('/:id', restaurantController.getOneRestaurant)
 
-restaurantRouter.put('/:id', restaurantController.putOneRestaurant)
+restaurantRouter.put('/', authenticateJWT, isAdmin, restaurantController.putOneRestaurant)
 
-restaurantRouter.delete('/:id', restaurantController.deleteOneRestaurant)
+restaurantRouter.delete('/', authenticateJWT, isAdmin, restaurantController.deleteOneRestaurant)
