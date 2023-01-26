@@ -14,7 +14,7 @@ Ce que l'utilisateur peut faire:
 2. se connecter avec son email et son password
 3. créer une commande avec un restaurant (id) et un menu (id)
 4. appeler sa propre commande en l'appelant par son id pour la modifier
-5. regarder toutes les commandes déjà enregistrées (donne seulement les id des commandes)
+5. regarder toutes les commandes déjà enregistrées 
 6. regarder l'une de ses propre commandes (id du restaurant et id du menu)
 7. appeler sa propre commande en l'appelant par son id pour la supprimer
 
