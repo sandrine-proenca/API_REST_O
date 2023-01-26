@@ -4,7 +4,7 @@ import { Menu } from "../entity/Menu";
 
 /**
  * Class permettant la gestion des requètes SQL pour les menus
- * * **.getAllMenus()** : recupère tout les menus de la BDD
+ * * **.getAllMenus()** : recupère tous les menus de la BDD
  * * **.getMenuById()** : recupère un menu par son id de la BDD
  * * **.postmenu()** : ajoute un nouveau menu à la BDD
  * * **.updateMenu()** : modifie un menu par son id de la BDD
