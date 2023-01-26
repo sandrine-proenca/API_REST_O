@@ -2,6 +2,7 @@ import { AppDataSource } from "./data-source"
 import { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv"
 import { userRouter } from "./routes/userRouter";
+import { restaurantRouter } from "./routes/restaurantRouter";
 import express = require("express");
 
 
@@ -50,10 +51,10 @@ AppDataSource.initialize().then(async () => {
         next();
     });
 
-    /************************************************
+    /***********************************************
        * Add the route here
        */
-
+    app.use('/api/restaurant', restaurantRouter);
     app.use('/api/users', userRouter);
 
     app.all('*', function (req, res) {
