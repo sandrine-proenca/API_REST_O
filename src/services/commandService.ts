@@ -49,15 +49,24 @@ export class commandService {
     /**
        * ajoute une nouvelle commande à la BDD
        */
-    async postCommande(user: User, menu: Menu, restaurant: Restaurant): Promise<Commande | undefined> {
+    async postCommande(userId: number, menuId: number, restaurantId: number): Promise<Commande | undefined> {
         const commande = new Commande()
-        commande.user = user
-        commande.menu = menu
-        commande.restaurant = restaurant
 
-        await commande.save()
+        const user = await User.findOneBy({ id: userId })
+        const menu = await Menu.findOneBy({ id: menuId })
+        const restaurant = await Restaurant.findOneBy({ id: restaurantId })
 
-        return commande
+        if (user && menu && restaurant) {
+
+            commande.user = user
+            commande.menu = menu
+            commande.restaurant = restaurant
+
+            await commande.save()
+
+            return commande
+        }
+        return undefined
     }
 
 
@@ -71,23 +80,26 @@ export class commandService {
 
             return commande
         }
-        else {
-            return undefined
-        }
+        return undefined
     }
 
 
     /**
      * modifie une commande par son id de la BDD
      */
-    async updateCommande(updateMenu: Menu, updateRestaurant: Restaurant, id: number) {
-        const commande = await this.getCommandeById(id);
-        commande.menu = updateMenu
-        commande.restaurant = updateRestaurant
+    async updateCommande(commandeId: number, menuId: number, restaurantId: number) {
+        const commande = await this.getCommandeById(commandeId);
+        const menu = await Menu.findOneBy({ id: menuId })
+        const restaurant = await Restaurant.findOneBy({ id: restaurantId })
 
-        Commande.save(commande)
+        if (commande && menu && restaurant) {
 
-        return commande
+            commande.menu = menu
+            commande.restaurant = restaurant
+
+            await commande.save()
+            return commande
+        }
+        return undefined
     }
-
 }

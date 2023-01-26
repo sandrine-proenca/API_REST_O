@@ -3,12 +3,12 @@ import { Commande } from "src/entity/Command";
 import { Menu } from "src/entity/Menu";
 import { Restaurant } from "src/entity/Restaurant";
 import { User } from "src/entity/User";
-import { postCommandeInput, postCommandOutput } from "src/interface/postCommand.interface";
+
 import { commandService } from "src/services/commandService";
 
 
 
-const commandeService = new commandService(Commande,User,Restaurant,Menu)
+const commandeService = new commandService()
 
 
 
@@ -101,7 +101,9 @@ export class MenuController {
         * Controle prealable a l'ajout d'une nouvelle commande
         */
     async postCommande(req: Request, res: Response) {
-        const { menuId, restaurantId, userId }: postCommandeInput = req.body
+        const restaurantId: number = req.body.restaurant
+        const menuId: number = req.body.menu
+        const userId: number = req.body.user
 
         if (restaurantId && menuId) {
             try {
